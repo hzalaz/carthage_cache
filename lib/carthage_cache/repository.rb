@@ -42,11 +42,11 @@ module CarthageCache
     end
 
     def archive_exist?(archive_filename)
-      system "wget", "--method=HEAD", "#{base_url}/#{archive_filename}", "-q"
+      system "curl", "-I", "-s", "-f", "#{base_url}/#{archive_filename}"
     end
 
     def download(archive_filename, destination_path)
-      system "wget", "--output-document=#{destination_path}", "#{base_url}/#{archive_filename}", "-q"
+      system "curl", "-s", "-f", "#{base_url}/#{archive_filename}", "-o #{destination_path}"
     end
 
     def upload(archive_filename, archive_path)
